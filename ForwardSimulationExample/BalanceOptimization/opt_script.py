@@ -63,7 +63,7 @@ def parallel_func():
     import multiprocessing as mp
 
     # TODO: you should try changing maxiter and popsize
-    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 1, "popsize": 8})
+    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 20, "popsize": 8})
     pool = mp.Pool(es.popsize)
     while not es.stop():
         X = es.ask()
