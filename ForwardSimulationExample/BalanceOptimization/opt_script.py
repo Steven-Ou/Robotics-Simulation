@@ -46,7 +46,7 @@ def simfunc(params, viz=False):
         # what cost function term could you add after the line below:
 
         toes_r = model.getBodySet().get("toes_r").getTransformInGround(state).p()
-        f = f + toes_r.get(1)
+        f = f + (10.0 * com.get(1)) + toes_r.get(1)
 
     if viz:
         statesDegrees = manager.getStateStorage()
