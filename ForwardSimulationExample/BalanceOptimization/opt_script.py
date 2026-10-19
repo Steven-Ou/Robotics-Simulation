@@ -46,7 +46,7 @@ def simfunc(params, viz=False):
         # what cost function term could you add after the line below:
 
         toes_r = model.getBodySet().get("toes_r").getTransformInGround(state).p()
-        f = f + (10.0 * com.get(1)) + toes_r.get(1)
+        f = f + (5.0 * toes_r.get(1))
 
     if viz:
         statesDegrees = manager.getStateStorage()
@@ -63,7 +63,7 @@ def parallel_func():
     import multiprocessing as mp
 
     # TODO: you should try changing maxiter and popsize
-    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 20, "popsize": 8})
+    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 100, "popsize": 8})
     pool = mp.Pool(es.popsize)
     while not es.stop():
         X = es.ask()
