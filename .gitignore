@@ -1,2 +1,8 @@
-ForwardSimulationExample/BalanceOptimization/.DS_Store
-ForwardSimulationExample/BalanceOptimization/.DS_Store
+*ForwardSimulationExample/BalanceOptimization/.DS_Store
+*ForwardSimulationExample/BalanceOptimization/.DS_Store
+*.DS_Store
+*ForwardSimulationExample/.DS_Store
+
+*.sto
+
+*.txt

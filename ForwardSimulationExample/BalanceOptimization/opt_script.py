@@ -20,7 +20,7 @@ def simfunc(params, viz=False):
     muscleController = osim.PrescribedController()
     muscleSet = model.getMuscles()
     nbr_muscles = muscleSet.getSize()
-    # state = model.initSystem()
+    
     editableCoordSet = model.updCoordinateSet()
     for i in range(0, editableCoordSet.getSize() - 1):
         editableCoordSet.get(i).setValue(state, init_state[i])
@@ -40,20 +40,24 @@ def simfunc(params, viz=False):
 
         model.realizeDynamics(state)
         com = model.calcMassCenterPosition(state)
+        
         # TODO: change one thing in the line below to encourage the character to stay upright.
-        f = f + com.get(1)
+        # Ensure this is ADDING the Y-coordinate (1) so it is maximized.
+        f = f + (3.0 * com.get(1))
+        
         # TODO: if you wanted the character to have its right toe as high as possible,
         # what cost function term could you add after the line below:
-
         toes_r = model.getBodySet().get("toes_r").getTransformInGround(state).p()
-        f = f + (5.0 * toes_r.get(1))
+        
+        # Add the right toe's Y-coordinate to the running total
+        f = f + toes_r.get(1)
 
     if viz:
         statesDegrees = manager.getStateStorage()
         states_table = manager.getStatesTable()
         osim.STOFileAdapter.write(states_table, "forwardSimulation.sto")
-        # statesDegrees.printToFile("optSimulation.sto", "w");
 
+    # The running total 'f' is inverted here, meaning the optimizer will MAXIMIZE the terms you added above.
     f = -1 * f
     print(f)
     return f
@@ -63,7 +67,7 @@ def parallel_func():
     import multiprocessing as mp
 
     # TODO: you should try changing maxiter and popsize
-    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 100, "popsize": 8})
+    es = cma.CMAEvolutionStrategy(KNOTS * 18 * [0], 0.3, {"maxiter": 20, "popsize": 8})
     pool = mp.Pool(es.popsize)
     while not es.stop():
         X = es.ask()
@@ -80,4 +84,3 @@ def replay_solution():
 
 if __name__ == "__main__":
     parallel_func()
-    # replay_solution()
