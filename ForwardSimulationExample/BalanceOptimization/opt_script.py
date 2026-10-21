@@ -20,7 +20,7 @@ def simfunc(params, viz=False):
     muscleController = osim.PrescribedController()
     muscleSet = model.getMuscles()
     nbr_muscles = muscleSet.getSize()
-    
+
     editableCoordSet = model.updCoordinateSet()
     for i in range(0, editableCoordSet.getSize() - 1):
         editableCoordSet.get(i).setValue(state, init_state[i])
@@ -40,17 +40,16 @@ def simfunc(params, viz=False):
 
         model.realizeDynamics(state)
         com = model.calcMassCenterPosition(state)
-        
+
         # TODO: change one thing in the line below to encourage the character to stay upright.
         # Ensure this is ADDING the Y-coordinate (1) so it is maximized.
         f = f + (10.0 * com.get(1))
-        
-        
+
         # TODO: if you wanted the character to have its right toe as high as possible,
         # what cost function term could you add after the line below:
         toes_r = model.getBodySet().get("toes_r").getTransformInGround(state).p()
         f = f + (10.0 * toes_r.get(1))
-        
+
         # Add the right toe's Y-coordinate to the running total
         toes_l = model.getBodySet().get("toes_l").getTransformInGround(state).p()
         f = f - (20.0 * toes_l.get(1))
