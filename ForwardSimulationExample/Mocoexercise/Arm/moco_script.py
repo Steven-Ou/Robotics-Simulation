@@ -19,8 +19,8 @@ problem.setStateInfo("/jointset/elbow/elbow_flexion/value", [0.0, 3.14159], 0, 0
 problem.setStateInfo(
     "/jointset/radioulnar/pro_sup/value", [-3.14159, 3.14159], 0, -3.14159
 )
-problem.setStateInfo("/jointset/.*/flexion/value", [-1.5708, 1.5708], 0, 1.5708)
-problem.setStateInfo("/jointset/.*/deviation/value", [-0.5, 0.5], 0, 0.5)
+problem.setStateInfoPattern("/jointset/.*/flexion/value", [-1.5708, 1.5708], 0, 1.5708)
+problem.setStateInfoPattern("/jointset/.*/deviation/value", [-0.5, 0.5], 0, 0.5)
 
 problem.setStateInfoPattern("/jointset/.*/speed", [], 0, 0)
 problem.setStateInfoPattern("/forceset/.*/activation", [0, 1], 0)
