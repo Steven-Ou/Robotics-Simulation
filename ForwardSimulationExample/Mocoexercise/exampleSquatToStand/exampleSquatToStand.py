@@ -36,16 +36,16 @@ problem.setModel(torqueDrivenModel)
 # problem.setStateInfoPattern('/path/to/states/.*/value', ...)
 
 # Time bounds
-problem.setTimeBounds(0, 1)
+problem.setTimeBounds(0, 3)
 
 # Position bounds: the model should start in a squat and finish 
 # standing up.
 problem.setStateInfo('/jointset/hip_r/hip_flexion_r/value', 
-    [-2, 0.5], -2, 0)
+    [-2, 0.5], -2, -2)
 problem.setStateInfo('/jointset/knee_r/knee_angle_r/value', 
-    [-2, 0], -2, 0)
+    [-2, 0], -2, -2)
 problem.setStateInfo('/jointset/ankle_r/ankle_angle_r/value', 
-    [-0.5, 0.7], -0.5, 0)
+    [-0.5, 0.7], -0.5, -0.5)
 
 # Velocity bounds: all model coordinates should start and end at rest.
 problem.setStateInfoPattern('/jointset/.*/speed', [], 0, 0)

@@ -6,3 +6,5 @@
 *.sto
 
 *.txt
+
+*.DS_Store
