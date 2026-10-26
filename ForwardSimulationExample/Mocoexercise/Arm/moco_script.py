@@ -12,8 +12,8 @@ problem.setModel(model)
 
 problem.setTimeBounds(0, 1)
 
-problem.setStateInfo("/jointset/shoulder0/elv_angle/value", [-1.5, 2.0], 0)
-problem.setStateInfo("/jointset/shoulder1/shoulder_elv/value", [0, 3.5], 0, 3.14159)
+problem.setStateInfo("/jointset/shoulder0/elv_angle/value", [-1.5, 2.0], 0, 1.5708)
+problem.setStateInfo("/jointset/shoulder1/shoulder_elv/value", [0, 3.5], 0, 1.5708)
 problem.setStateInfo("/jointset/shoulder2/shoulder_rot/value", [0, 2.5], 0)
 problem.setStateInfo("/jointset/elbow/elbow_flexion/value", [0.0, 3.14159], 0, 0)
 problem.setStateInfo(
