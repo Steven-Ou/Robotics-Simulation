@@ -33,6 +33,7 @@ solver.set_optim_convergence_tolerance(10)
 solver.set_optim_constraint_tolerance(10)
 solver.set_optim_max_iterations(1000)
 
+
 if not os.path.isfile("predictSolution.sto"):
     predictSolution = study.solve()
     solutionUnsealed = predictSolution.unseal()
