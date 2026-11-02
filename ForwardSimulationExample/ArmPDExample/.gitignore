@@ -1,0 +1,7 @@
+*.vtp
+*.mix
+*.stl
+*.osim
+*.pyc
+*.DS_Store
+Geometry
