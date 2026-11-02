@@ -56,18 +56,19 @@ for i in range(0,nbr_timesteps+1):
 	elbow_flexion_v = coords.get('elbow_flexion').getSpeedValue(state)
  
  
-	for j in range(functionSet.getSize()):
-		func = osim.Constant.safeDownCast(functionSet.get(j))
-		
-		if j == 1:
-			func.setValue(-20 * (shoulder_elv - 1.5708) - 1 * shoulder_elv_v)
-		elif j == 3:
-			# Target is 0.0 (fully extended elbow)
-			func.setValue(-20 * (elbow_flexion - 0.0) - 1 * elbow_flexion_v)
+for j in range(functionSet.getSize()):
+    func = osim.Constant.safeDownCast(functionSet.get(j))
 
+    if j == 1:
+        # func.setValue(-20 * (shoulder_elv - 1.5708) - 1 * shoulder_elv_v) - the answer for the arm to be straight left
+        func.setValue(-20 * (shoulder_elv - 2.2689) - 1 * shoulder_elv_v) # for the arm to be straight up touching sky
+    elif j == 3:
+        # Target is 0.0 (fully extended elbow)
+        # func.setValue(-20 * (elbow_flexion - 0.0) - 1 * elbow_flexion_v)
+        func.setValue(-20 * (elbow_flexion - 0.0) - 1 * elbow_flexion_v)  # for the arm to be straight up touching sky
 
-	model.realizeDynamics(state);
-	com = model.calcMassCenterPosition(state);
+model.realizeDynamics(state)
+com = model.calcMassCenterPosition(state)
 
 states_table = manager.getStatesTable()
 osim.STOFileAdapter.write(states_table, "PDcontrol.sto")
