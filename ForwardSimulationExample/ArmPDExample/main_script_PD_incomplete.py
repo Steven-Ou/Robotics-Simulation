@@ -52,13 +52,18 @@ for i in range(0,nbr_timesteps+1):
     #INCLUDE CODE FOR ELBOW. 
     #The angle is elbow_flexion.
 
+	elbow_flexion = coords.get('elbow_flexion').getValue(state)
+	elbow_flexion_v = coords.get('elbow_flexion').getSpeedValue(state)
+ 
+ 
 	for j in range(functionSet.getSize()):
 		func = osim.Constant.safeDownCast(functionSet.get(j))
 		
 		if j == 1:
 			func.setValue(-20 * (shoulder_elv - 1.5708) - 1 * shoulder_elv_v)
-		#elif j == 3:
-		#	INCLUDE CODE FOR ELBOW  
+		elif j == 3:
+			# Target is 0.0 (fully extended elbow)
+			func.setValue(-20 * (elbow_flexion - 0.0) - 1 * elbow_flexion_v)
 
 
 	model.realizeDynamics(state);
